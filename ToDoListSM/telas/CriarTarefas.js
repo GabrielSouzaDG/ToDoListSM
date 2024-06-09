@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { addTarefa } from '../database/database';
 
@@ -19,14 +19,17 @@ const CriarTarefas = () => {
             <TextInput
                 style={styles.input}
                 placeholder="Descrição da Tarefa"
+                placeholderTextColor="#999"
                 value={descricao}
                 onChangeText={setDescricao}
             />
-            <Button
-                title="Salvar Tarefa"
+            <TouchableOpacity
+                style={styles.saveButton}
                 onPress={handleAddTarefa}
-                disabled={!descricao.trim()} // Desabilita o botão se a descrição estiver vazia
-            />
+                disabled={!descricao.trim()}
+            >
+                <Text style={styles.saveButtonText}>Salvar Tarefa</Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -34,15 +37,41 @@ const CriarTarefas = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#f7f7f7', // Cor de fundo para a tela
         padding: 20,
         justifyContent: 'center', // Centraliza os elementos verticalmente
     },
     input: {
-        height: 40,
+        height: 50,
+        backgroundColor: '#fff', // Cor de fundo para o campo de entrada
         borderColor: '#ccc',
         borderWidth: 1,
+        borderRadius: 5,
         marginBottom: 20,
-        padding: 10,
+        padding: 15,
+        fontSize: 16,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
+        elevation: 2,
+    },
+    saveButton: {
+        backgroundColor: '#28a745', // Cor de fundo para o botão
+        padding: 15,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
+        elevation: 2,
+    },
+    saveButtonText: {
+        color: '#fff', // Cor do texto do botão
+        fontSize: 16,
+        fontWeight: 'bold',
     },
 });
 
